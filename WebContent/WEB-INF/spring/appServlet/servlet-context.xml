@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 掃描 servlet 組成元件 -->
+	<context:component-scan base-package="com"></context:component-scan>
+
+
+	<!-- 動態加載之多國語系攔截器 -->
+	<!-- <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> 
+		<property name="paramName" value="lang" /> </bean> <bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" /> -->
+
+
+
+	<!-- json解析器 -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- JSON 物件轉換器 -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>
+
+	<!-- XML 物件轉換器 -->
+	<bean id="xmlMessageConverter"
+		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
+	</bean>
+
+	<!-- -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+				<ref bean="xmlMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 將資源檔案路徑轉換為靜態檔案 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- 上傳檔案解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
+	<!-- 頁面資源轉換器 -->
+	<!-- Bean id 必须是“messageSource”，依此選擇語系 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="message" /> <!-- 資源檔名 -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds">
+			<value>0</value>
+		</property>
+	</bean>
+
+	<!-- 使用  CookieLocaleResolver 配合 LocaleChangeInterceptor 讓使用者自行可以選擇語系-->
+	<!-- 選擇方法為由網址後端送參數   locale=zh_TW -->
+	<!-- 除 CookieLocaleResolver 另可使用 SessionLocaleResolver 選擇語系  -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+
+
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+</beans>
