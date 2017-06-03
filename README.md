@@ -15,8 +15,8 @@
 * CSS套件：Twitter Bootstrap 3.3.7
 
 3. 運作環境
-* App Server: Weblogic 10.3.6
-* Jdk: 1.8
+* Ap Server: Weblogic 10.3.6
+* Jdk: 1.6
 
 ## 實現行為
 
