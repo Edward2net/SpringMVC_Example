@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 掃描 servlet 組成元件 -->
-	<context:component-scan base-package="com"></context:component-scan>
+	<context:component-scan base-package="com.spring.web"></context:component-scan>
 
 
 	<!-- 動態加載之多國語系攔截器 -->
