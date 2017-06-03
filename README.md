@@ -14,6 +14,10 @@
 * JS套件：jQuery 3.2.1
 * CSS套件：Twitter Bootstrap 3.3.7
 
+3. 運作環境
+* App Server: Weblogic 10.3.6
+* Jdk: 1.8
+
 ## 實現行為
 
 1. 使用 Post 及 Get 傳遞數值
