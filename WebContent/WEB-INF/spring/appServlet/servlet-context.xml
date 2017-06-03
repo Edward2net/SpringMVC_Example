@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- 掃描 servlet 組成元件 -->
+	<!-- 掃描 servlet 組成元件，掃描範圍過大會導致組譯及發布緩慢 -->
 	<context:component-scan base-package="com.spring.web"></context:component-scan>
 
 
@@ -17,7 +17,7 @@
 
 
 
-	<!-- json解析器 -->
+	<!-- json 解析器 -->
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
